@@ -1,0 +1,126 @@
+#! /usr/bin/env ruby
+#  encoding: utf-8
+
+require_relative '../lib/senv.rb'
+require_relative '../lib/script.rb'
+require_relative '../lib/util.rb'
+
+script do
+  help <<~____
+    # TODO
+  ____
+
+  run do
+    start
+  end
+
+  run :start do
+    start
+  end
+
+  def start
+    setup
+
+    @servers.each do |config|
+      cmd = config.fetch(:cmd)
+      name = config.fetch(:name)
+      env = config.fetch(:env)
+      port = config.fetch(:port)
+
+      background(cmd, :env => env)
+
+      wait_until_bound(port)
+    end
+
+    wait_for_servers
+
+    teardown
+  end
+
+  def setup
+  #
+    @script_f = File.expand_path(__FILE__)
+    @script_d = File.dirname(@script_f)
+    @root_d = File.dirname(@script_d)
+
+    Dir.chdir(@root_d)
+
+  #
+    %w[ BACKEND_PORT FRONTEND_PORT PROXY_PORT PORT ].each do |option|
+      if @options[option]
+        ENV[option] = @options[option]
+      end
+    end
+
+  #
+    Senv.load
+
+  #
+    @ENV = Hash.new.update(ENV.to_hash) 
+
+  #
+    @servers = []
+
+    %w[ backend frontend proxy ].each do |which|
+      @servers.push({
+        :name => which,
+        :cmd => "./#{ which }/script/server",
+        :port => ENV.fetch("#{ which.upcase }_PORT"),
+        :env  => env_for('SERVER' => which),
+      })
+    end
+
+
+    @threads = []
+
+    STDOUT.sync = true
+    STDERR.sync = true
+
+    at_exit do
+      STDOUT.flush
+      STDERR.flush
+    end
+  end
+
+  def background(cmd, options = {})
+    env = options.fetch(:env){ Hash.new }
+
+    cmd = "#{ cmd } 2>&1"
+
+    thread = Thread.new do
+      Thread.current.abort_on_exception = true
+      system(env, cmd)
+    end
+
+    @threads << thread
+
+    thread
+  end
+
+  def wait_until_bound(port)
+    bound = false
+
+    4.times do
+      sleep 0.1
+
+      if Util.port_open?(port)
+        sleep 0.42
+      else
+        bound = true
+      end
+    end
+
+    bound
+  end
+
+  def wait_for_servers
+    @threads.map{|thread| thread.join}
+  end
+
+  def teardown
+  end
+  
+  def env_for(env = {})
+    @ENV.merge(env)
+  end
+end

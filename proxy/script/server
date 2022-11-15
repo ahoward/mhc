@@ -1,0 +1,26 @@
+#! /usr/bin/env ruby
+#
+  require_relative '../../lib/senv'
+  require_relative '../../lib/util'
+
+#
+  script = __FILE__
+  script_dir = File.expand_path(File.dirname(script))
+  root = File.dirname(script_dir)
+
+#
+  Senv.load
+
+#
+  proxy_port = ENV.fetch('PROXY_PORT'){ ENV.fetch('PORT') }
+  frontend_port = ENV.fetch('FRONTEND_PORT')
+  backend_port = ENV.fetch('BACKEND_PORT')
+
+#
+  cmd = "HOST=0.0.0.0 PORT=#{ proxy_port } http-proxy --hostname 0.0.0.0 --proxyHost --verbose --port #{ proxy_port } 0.0.0.0:#{ frontend_port } /a/=0.0.0.0:#{ backend_port }"
+
+#
+  Util.serve!(cmd, :root => root, :port => proxy_port)
+
+#
+  sleep

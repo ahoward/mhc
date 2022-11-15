@@ -1,0 +1,33 @@
+#! /usr/bin/env ruby
+#
+  require_relative '../../lib/senv'
+  require_relative '../../lib/util'
+
+#
+  script = __FILE__
+  script_dir = File.expand_path(File.dirname(script))
+  root = File.dirname(script_dir)
+
+#
+  Senv.load
+
+#
+  proxy_port = ENV.fetch('PROXY_PORT')
+  frontend_port = ENV.fetch('FRONTEND_PORT'){ ENV.fetch('PORT') }
+  backend_port = ENV.fetch('BACKEND_PORT')
+
+#
+  cmd =
+    if Senv.env == 'development'
+      "HOST=127.0.0.1 PORT=#{ frontend_port } npm run dev --"
+    else
+      # NOTE -- NITRO_PRESET set to render-com
+      "HOST=127.0.0.1 PORT=#{ frontend_port } node .output/server/index.mjs"
+    end
+
+#
+  Util.serve!(cmd, :root => root, :port => frontend_port)
+  puts cmd
+
+#
+  sleep

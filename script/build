@@ -1,0 +1,48 @@
+#! /bin/bash
+
+# TODO: ./script/build should do anything your app requires to be built, such
+# as compiling assets or binaries.
+#
+
+#
+  set -e
+
+#
+  script_f="${BASH_SOURCE[0]}"
+  script_d="$( cd "$( dirname "${script_f}" )" >/dev/null 2>&1 && pwd )"
+  root_d="$( cd "$( dirname "${script_d}" )" >/dev/null 2>&1 && pwd )"
+
+#
+  cd $root_d
+
+#
+  eval $(./bin/senv init)
+  printf "==========\n"
+  printf "SENV=${SENV}\n"
+
+#
+  printf "\n\n--------\n"
+  cd backend
+  if [ -f ./script/build ]; then
+    printf "./script/build @ $(pwd)...\n----\n"
+    ./script/build
+  fi
+  cd ..
+
+#
+  printf "\n\n--------\n"
+  cd frontend
+  if [ -f ./script/build ]; then
+    printf "./script/build @ $(pwd)...\n----\n"
+    ./script/build
+  fi
+  cd ..
+
+#
+  printf "\n\n--------\n"
+  cd proxy
+  if [ -f ./script/build ]; then
+    printf "./script/build @ $(pwd)...\n----\n"
+    ./script/build
+  fi
+  cd ..
