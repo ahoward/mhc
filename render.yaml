@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: wapp
+    name: mhc
     env: ruby
     buildCommand: "./script/build"
     startCommand: "./script/server"
