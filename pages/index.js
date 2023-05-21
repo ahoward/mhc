@@ -19,8 +19,8 @@ export default function Home() {
 
         <p>
           <code>
-            a stealth, minimalist, fast-and-light software agency
-            spun from from <a target="_blank" href="https://dojo4.com">dojo4</a> cloth, and rewoven in <a target="_blank" href="https://mtf-trek.com">the matanuska valley</a>
+            a stealth, minimalist, fast-and-light digital agency for mountain lovers
+            spun from from <a target="_blank" href="https://www.dojo4.com/team/ara-howard">dojo4</a> cloth, and rewoven in <a target="_blank" href="https://mtf-trek.com">the matanuska valley</a>
           </code>
         </p>
       </main>
@@ -54,9 +54,6 @@ export default function Home() {
         }
         code {
           background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
