@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const title = 'mtn^codes';
-  const html_title = 'mtn <span style="color:#FF69B4;">^</span> codes';
+  const html_title = 'mtn<span style="color:#FF69B4;">^</span>codes';
 
   return (
     <div className={styles.container}>
