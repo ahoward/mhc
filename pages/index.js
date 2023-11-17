@@ -2,8 +2,8 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
-  const title = 'MTN ^ • Codes';
-  const html_title = 'MTN ^ <span style="color:#FF69B4;">•</span> Codes';
+  const title = 'mtn^codes';
+  const html_title = 'mtn <span style="color:#FF69B4;">^</span> codes';
 
   return (
     <div className={styles.container}>
