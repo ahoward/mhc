@@ -20,7 +20,7 @@ export default function Home() {
         <p>
           <code>
             a stealth, minimalist, fast-and-light digital agency for mountain lovers
-            spun from from <a target="_blank" href="https://www.dojo4.com/team/ara-howard">dojo4</a> cloth, and rewoven in <a target="_blank" href="https://mtf-trek.com">the matanuska valley</a>
+            spun from <a target="_blank" href="https://www.dojo4.com/team/ara-howard">dojo4</a> cloth, and rewoven in <a target="_blank" href="https://mtf-trek.com">the matanuska valley</a>
           </code>
         </p>
       </main>
