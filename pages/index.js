@@ -19,8 +19,9 @@ export default function Home() {
 
         <p>
           <code>
-            a stealth, minimalist, fast-and-light digital agency for mountain lovers
-            spun from <a target="_blank" href="https://www.dojo4.com/team/ara-howard">dojo4</a> cloth, and rewoven in <a target="_blank" href="https://mtf-trek.com">the matanuska valley</a>
+            a stealth, minimalist, fast-and-light digital agency for mountain lovers spun from <a target="_blank" href="https://www.dojo4.com/team/ara-howard">dojo4</a> cloth, and rewoven in the mountains of alaska and colorado.
+            <br/>
+            deep dev for think-tanks, p.e., and .gov.  no #vcevil attm.  not accepting clients until mar 2027
           </code>
         </p>
       </main>
