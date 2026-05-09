@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    text {
+      font-family: Menlo, Monaco, "Courier New", monospace;
+      font-weight: 600;
+    }
+  </style>
+  <text x="6" y="46" font-size="40" fill="#0070f3">mt</text>
+  <text x="44" y="26" font-size="22" fill="#FF69B4">n</text>
+</svg>

@@ -2,14 +2,15 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
-  const title = 'mtn^codes';
-  const html_title = 'mtn<span style="color:#FF69B4;">^</span>codes';
+  const title = 'mtⁿ';
+  const html_title = 'mt<span style="color:#FF69B4;">ⁿ</span>';
 
   return (
     <div className={styles.container}>
       <Head>
         <title>{title}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="alternate icon" href="/favicon.ico" />
       </Head>
 
       <main>
