@@ -8,7 +8,7 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: var(--glacier);
   text-decoration: none;
 }
 
@@ -68,8 +68,8 @@
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: var(--glacier);
+  border-color: var(--glacier);
 }
 
 .card h3 {

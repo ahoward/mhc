@@ -1,14 +1,31 @@
+:root {
+  --fireweed: #C9377A;
+  --glacier: #6FB3C4;
+  --taiga: #2F4A2F;
+  --aurora: #7CFFB2;
+  --tundra: #6B4A2B;
+  --snow: #FAFAF7;
+  --basalt: #1C1C1E;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
+  background: var(--snow);
+  color: var(--basalt);
   font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
+  color: var(--glacier);
   text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: var(--fireweed);
 }
 
 * {
