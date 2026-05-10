@@ -7,13 +7,13 @@
       :root {
         --fireweed: #C9377A;
         --glacier: #6FB3C4;
+        --sun: #E8A33D;
         --basalt: #1C1C1E;
       }
       body {
         font-family: 'Major Mono Display', monospace;
         font-size: 420px;
         background: var(--basalt);
-        color: var(--glacier);
         margin: 0;
         display: flex;
         align-items: center;
@@ -23,8 +23,10 @@
       .mark {
         line-height: 1;
       }
+      .mark .m { color: var(--fireweed); }
+      .mark .t { color: var(--glacier); }
       .mark .sup {
-        color: var(--fireweed);
+        color: var(--sun);
         font-size: 0.5em;
         vertical-align: super;
       }
@@ -32,6 +34,6 @@
   </head>
 
   <body>
-    <div class="mark">mt<span class="sup">ⁿ</span></div>
+    <div class="mark"><span class="m">m</span><span class="t">t</span><span class="sup">ⁿ</span></div>
   </body>
 </html>

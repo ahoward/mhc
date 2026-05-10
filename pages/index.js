@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const title = 'mtⁿ';
-  const html_title = 'mt<span style="color:var(--fireweed);">ⁿ</span>';
+  const html_title = '<span style="color:var(--fireweed);">m</span><span style="color:var(--glacier);">t</span><span style="color:var(--sun);">ⁿ</span>';
 
   return (
     <div className={styles.container}>

@@ -5,6 +5,7 @@
       font-weight: 600;
     }
   </style>
-  <text x="6" y="46" font-size="40" fill="#6FB3C4">mt</text>
-  <text x="44" y="26" font-size="22" fill="#C9377A">n</text>
+  <text x="6" y="46" font-size="40" fill="#C9377A">m</text>
+  <text x="26" y="46" font-size="40" fill="#6FB3C4">t</text>
+  <text x="44" y="26" font-size="22" fill="#E8A33D">n</text>
 </svg>
