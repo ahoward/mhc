@@ -2,10 +2,10 @@
   <style>
     text {
       font-family: Menlo, Monaco, "Courier New", monospace;
-      font-weight: 600;
+      font-weight: 700;
     }
   </style>
-  <text x="6" y="46" font-size="40" fill="#FF2E93">m</text>
-  <text x="26" y="46" font-size="40" fill="#1FD8E8">t</text>
-  <text x="44" y="26" font-size="22" fill="#FFC81F">n</text>
+  <text x="6" y="46" font-size="40" fill="#FF0080">m</text>
+  <text x="26" y="46" font-size="40" fill="#00E5FF">t</text>
+  <text x="44" y="26" font-size="22" fill="#FFD400">n</text>
 </svg>
