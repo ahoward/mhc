@@ -1,18 +1,8 @@
 {
   "private": true,
+  "description": "dev-only tooling for the mtⁿ favicon/wordmark pipeline (brand/build.mjs)",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
     "brand": "node brand/build.mjs"
-  },
-  "engines": {
-    "node": ">=22.0.0"
-  },
-  "dependencies": {
-    "next": "latest",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "png-to-ico": "^3.0.1",

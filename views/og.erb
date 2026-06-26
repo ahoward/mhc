@@ -1,0 +1,24 @@
+<%
+  site        = 'https://mountainhigh.codes'
+  title       = 'mtⁿ'
+  description = 'a hacker company. radically simple. utter zen.'
+  image       = '/favicon.png'
+
+  if data && data.respond_to?(:get)
+    title       = data.get(:og, :title) || data.get(:title) || title
+    description = data.get(:og, :description) || data.get(:description) || description
+    image       = data.get(:og, :image, :url) || data.get(:og, :image) || data.get(:image) || image
+  end
+
+  absolutify = proc{|url| url.to_s.index('://') ? url : "#{ site }#{ ('/' + url.to_s).squeeze('/') }"}
+  img = absolutify[image]
+%>
+<title><%= title %></title>
+
+<meta name="description" content="<%= description %>" />
+
+<meta property="og:title" content="<%= title %>"/>
+<meta property="og:description" content="<%= description %>" />
+<meta property="og:image" content="<%= img %>" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="<%= site %>" />

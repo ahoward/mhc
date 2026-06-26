@@ -1,0 +1,311 @@
+#! /usr/bin/env ruby
+
+script do
+  tldr <<~____
+
+    ./script/build
+
+  ____
+
+  param :dojo4
+  param :translate
+  param :full   # force a full (non-incremental) rebuild
+
+  run do
+    setup!
+
+    build!
+  end
+
+  def setup!
+    @site = Site.default
+    @cache = @site.cache  # share the site's transactional cache
+  end
+
+  def site
+    @site
+  end
+
+  def ro
+    site.ro
+  end
+
+  def cache
+    @cache
+  end
+
+  def build!
+  #
+    dir = './build'
+    tmp = tmpdir!
+    dojo4 = false # no dojo4 archive in this site
+    translate = !!params.has_key?(:translate)
+    full = !!params.has_key?(:full) || !test(?d, dir) || layout_dirty?(dir)
+
+    #ENV['RO_IMG_URL'] = 'https://res.cloudinary.com/drawohara/image/upload/ro' # FIXME
+
+  #
+    # incremental: seed tmp from existing build/ so we only re-render changes.
+    # full (or first build, or layout changed): start clean.
+    unless full
+      puts "=" * 42
+      puts "SEED #{ tmp } from #{ dir } (incremental)"
+      puts "-" * 42
+      system "rsync --archive #{ dir }/ #{ tmp }/"
+      puts
+    end
+
+    puts "=" * 42
+    puts "BUILD #{ tmp }#{ full ? '' : ' (incremental)' }"
+    puts "-" * 42
+
+    stats =
+      site_build!(dir: tmp, dojo4:, incremental: !full) do |url:, file:|
+        puts("#{ url } -> #{ file }")
+      end
+
+    puts '---'
+    p(stats:)
+    puts
+
+  #
+    if translate
+      puts "=" * 42
+      langs = site.dato.fetch(:langs)
+      puts "TRANSLATE #{ langs.join ' ' }"
+      puts "-" * 42
+      system "./script/translate #{ langs.join ' ' }"
+      puts
+    end
+
+  #
+    puts "=" * 42
+    puts "RSYNC ./public/ -> #{ tmp }"
+    puts "-" * 42
+    system "rsync --archive --ignore-existing ./public/ #{ tmp }"
+    puts
+
+
+  #
+    puts "=" * 42
+    puts "MV .#{ tmp } -> #{ dir }"
+    puts "-" * 42
+    mv!(tmp, dir)
+    puts
+
+  end
+
+  def site_build!(dir:, dojo4: false, parallel: 8, incremental: false, &block)
+    err = proc do |details|
+      $stderr.puts(JSON.pretty_generate(details))
+      exit(1)
+    end
+
+    path_for = proc do |url|
+      ext = url[%r`\..*$`]
+      ext ? File.join(dir, url) : File.join(dir, url, 'index.html')
+    end
+
+    # render-and-write a single URL.
+    build_url = proc do |url|
+      resp = @site.get(url)
+
+      unless resp.ok?
+        details = {url:, status: resp.status, headers: resp.headers, body: JSON.parse(resp.body.join)}
+        err[details]
+      end
+
+      path = path_for[url]
+      FileUtils.rm_f(path) if test(?e, path)  # incremental: overwrite stale
+      binwrite!(path, resp)
+
+      block.call(url:, file: url) if block
+    end
+
+    build_sitemap = proc do |urls|
+      base = 'https://mountainhigh.codes'
+
+      links = urls.map{|url| base + url }
+
+      sitemap = links.join("\n")
+
+      path = File.join(dir, 'sitemap.txt')
+      FileUtils.rm_f(path) if test(?e, path)
+      binwrite!(path, sitemap)
+    end
+
+    a = Time.now.to_f
+
+    # site.urls is cached via site.cache (lib/site.rb), so the /sitemap route's
+    # call to site.urls during build is free.
+    urls = @site.urls.uniq
+
+    candidate_urls =
+      if dojo4
+        urls
+      else
+        urls.select{|url| not url.start_with?('/dojo4') }
+      end
+
+    # incremental filter: drop urls whose built file is newer than every source.
+    # /sitemap always rebuilds (it depends on all urls, cheap to render).
+    build_urls =
+      if incremental
+        candidate_urls.select do |url|
+          url == '/sitemap' || stale?(url, path_for[url])
+        end
+      else
+        candidate_urls
+      end
+
+    n_total = candidate_urls.size
+    n_build = build_urls.size
+    n_skip = n_total - n_build
+
+    if parallel
+      begin
+        # in_processes: kramdown + ERB rendering is CPU-bound; processes
+        # sidestep the GVL. the cache only helps within a single process,
+        # so we lose the per-build sharing across workers — but the
+        # speedup from real parallelism more than compensates.
+        Parallel.each(build_urls, in_processes: parallel) do |url|
+          build_url[url]
+        end
+      rescue Parallel::DeadWorker
+        exit(1)
+      end
+    else
+      build_urls.each do |url|
+        build_url[url]
+      end
+    end
+
+    build_sitemap[urls]
+
+    b = Time.now.to_f
+    e = (b - a).round(2)
+
+    stats = {n: n_total, built: n_build, skipped: n_skip, e:}
+  end
+
+  # has any source backing `url` been modified more recently than `built_path`?
+  # source mapping is intentionally simple: pull every file the URL's ro entry
+  # touches (yml + body.md + asset dir), plus the active view (best-effort).
+  def stale?(url, built_path)
+    return true unless test(?e, built_path)
+    built_mtime = File.mtime(built_path)
+
+    srcs = sources_for(url)
+    return true if srcs.empty?  # don't know how to map → always rebuild
+
+    srcs.any?{|p| test(?e, p) && File.mtime(p) > built_mtime }
+  end
+
+  # map a url to source file paths to stat. cached per-url.
+  def sources_for(url)
+    @cache.get(:sources, url) do
+      ro_root = File.expand_path('./public/ro')
+
+      paths =
+        case url
+          when '/'
+            ro_paths(ro_root, 'pages/index')
+          when '/sitemap', '/goto'
+            []  # /sitemap rebuilt unconditionally; /goto is a static url list
+          when %r{^/io/([^/]+)$}
+            ro_paths(ro_root, "io/#{$1}")
+          when '/io'
+            Dir.glob("#{ ro_root }/io/**/*").select{|p| test(?f, p)}
+          when %r{^/dojo4/archive/([^/]+)$}
+            ro_paths(ro_root, "dojo4/#{$1}")
+          when '/dojo4'
+            Dir.glob("#{ ro_root }/dojo4/**/*").select{|p| test(?f, p)}
+          when %r{^/purls/(.+)$}
+            ro_paths(ro_root, "purls/#{$1}")
+          when '/purls'
+            Dir.glob("#{ ro_root }/purls/**/*").select{|p| test(?f, p)}
+          when %r{^/([0-9])$}
+            ro_paths(ro_root, "purls/#{$1}")
+          when '/quotes'
+            ["#{ ro_root }/../../dato/quotes.yml"]
+          when '/rubygems'
+            ["#{ ro_root }/../../dato/rubygems.yml", './views/rubygems.erb']
+          when '/langs'
+            ["#{ ro_root }/../../dato/langs.yml", "#{ ro_root }/../../dato/iso-639-1.json"]
+          when '/ai'
+            ['./views/ai.erb.md', './public/ai.txt']
+          when %r{^/([^/]+)$}
+            ro_paths(ro_root, "pages/#{$1}")
+          else
+            []
+        end
+
+      # config/site.rb is a global dependency for any route
+      paths + ['./config/site.rb']
+    end
+  end
+
+  # for a ro entry at <root>/<id>, return the yml + body.md + assets it touches
+  def ro_paths(root, id)
+    paths = []
+    yml = "#{ root }/#{ id }.yml"
+    paths << yml if test(?f, yml)
+    body = "#{ root }/#{ id }/body.md"
+    paths << body if test(?f, body)
+    paths.concat(Dir.glob("#{ root }/#{ id }/**/*").select{|p| test(?f, p)})
+    paths
+  end
+
+  # is the layout newer than the existing build dir? if yes, full rebuild.
+  # also catches "build/ doesn't exist" via caller.
+  def layout_dirty?(build_dir)
+    return false unless test(?d, build_dir)
+    layouts = Dir.glob('./views/layout*.erb')
+    return false if layouts.empty?
+    build_mtime = File.mtime(build_dir)
+    layouts.any?{|f| File.mtime(f) > build_mtime }
+  end
+
+  def clean!(dir)
+    if test(?d, dir)
+      trash = tmpdir!
+      FileUtils.mv(dir, trash)
+
+      fork do
+        FileUtils.rm_rf(trash)
+        `rm -rf #{ trash }`
+        exit!
+      end
+    end
+  end
+
+  def mkdir!(dir)
+    FileUtils.mkdir_p(dir)
+  end
+
+  def mv!(src, dst)
+    clean!(dst)
+    File.rename(src, dst)
+  end
+
+  def tmpdir!(&block)
+    uuid = SecureRandom.uuid_v7
+    dir = File.join('./tmp', uuid)
+    FileUtils.mkdir_p(dir)
+    dir
+  end
+
+  def binwrite!(path, data)
+    dirname = File.dirname(path)
+    FileUtils.mkdir_p(dirname) unless test(?e, dirname)
+    IO.binwrite(path, data)
+  end
+end
+
+
+BEGIN {
+  Dir.chdir(File.dirname(__dir__))
+
+  require './lib/script.rb'
+  require './config/boot.rb'
+}

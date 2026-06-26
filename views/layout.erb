@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= exports.fetch(:og){ render('views/og.erb', data:) } %>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+  <link rel="alternate icon" href="/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@400;600;700&display=swap">
+
+  <style>
+    :root {
+      --fireweed: #C81E6E;
+      --glacier:  #1A9CB5;
+      --sun:      #D99209;
+      --aurora:   #00FF88;
+      --taiga:    #2F4A2F;
+      --tundra:   #6B4A2B;
+      --snow:     #FAFAF7;
+      --basalt:   #1C1C1E;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background: var(--snow);
+      color: var(--basalt);
+      font-family: 'Overpass Mono', Menlo, Monaco, monospace;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    main {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+    }
+
+    .wordmark {
+      font-weight: 700;
+      font-size: clamp(3rem, 12vw, 7rem);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin: 0 0 3rem;
+      white-space: nowrap;
+    }
+    .wordmark .m { color: var(--fireweed); }
+    .wordmark .t { color: var(--glacier); }
+    .wordmark .n { color: var(--sun); }
+
+    p { margin: 0 0 1.4rem; }
+
+    a {
+      color: var(--glacier);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+    a:hover, a:focus { color: var(--fireweed); }
+
+    .vcevil { color: var(--fireweed); }
+
+    .contact { margin-top: 3rem; font-size: 1.1em; }
+  </style>
+</head>
+
+<body>
+  <main>
+    <%= yield %>
+  </main>
+</body>
+</html>

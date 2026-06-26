@@ -1,0 +1,56 @@
+# Build the ro/Ruby static site and deploy to GitHub Pages.
+name: deploy mtⁿ site to gh-pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Allow GITHUB_TOKEN to deploy to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One concurrent deployment; don't cancel an in-progress production deploy.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup gh-pages
+        uses: actions/configure-pages@v5
+        id: gh-pages
+
+      - name: setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.5'
+          bundler-cache: true
+
+      - name: build
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          ./script/build
+          # custom domain for GitHub Pages
+          echo 'mountainhigh.codes' > ./build/CNAME
+          ls -la ./build
+
+      - name: upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./build"
+
+      - name: deploy gh-pages
+        id: deployment
+        uses: actions/deploy-pages@v4
