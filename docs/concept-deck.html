@@ -39,9 +39,12 @@
 
   section{padding:3.4rem 0;border-top:1px solid var(--line)}
   section:first-of-type{border-top:0}
+  /* schematic "spec header" — drafting crosshair + a drawn extension line to the margin */
   .eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--glacier);
     display:flex;align-items:center;gap:.6rem}
-  .eyebrow .num{color:var(--sun)}
+  .eyebrow::before{content:"⌖";color:var(--glacier);font-size:.9em;opacity:.8}
+  .eyebrow::after{content:"";flex:1;height:0;border-top:1px dashed var(--line2);margin-left:.2rem}
+  .eyebrow .num{color:var(--sun);border:1px solid var(--line2);border-radius:3px;padding:.05rem .3rem}
   h2{font-size:clamp(1.4rem,4.4vw,2rem);margin:.7rem 0 0}
   p{font-size:1.02rem;margin:.9rem 0 0;max-width:60ch}
   p.big{font-size:clamp(1.05rem,3.2vw,1.25rem)}
@@ -59,9 +62,18 @@
 
   .cards{margin-top:1.4rem;display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
   @media(max-width:520px){.cards{grid-template-columns:1fr}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+  /* index-card / spec-block: squared, ruled top edge, technical */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1rem 1.1rem;
+    border-top:2px solid var(--glacier)}
   .card h3{font-size:.98rem;color:var(--glacier)}
   .card p{font-size:.9rem;margin-top:.4rem;color:var(--dim)}
+  /* Apollo/Gemini mission blocks */
+  .missions{margin-top:1.4rem;display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+  @media(max-width:520px){.missions{grid-template-columns:1fr}}
+  .mission{background:var(--card);border:1px solid var(--line2);border-radius:4px;padding:1rem 1.1rem;border-top:2px solid var(--sun)}
+  .mission .patch{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sun)}
+  .mission h3{font-size:1.05rem;margin-top:.25rem}
+  .mission p{font-size:.9rem;margin-top:.4rem;color:var(--dim)}
   .pull{font-family:var(--mono);font-size:clamp(1.1rem,3.4vw,1.5rem);line-height:1.35;border-left:3px solid var(--fireweed);
     padding-left:1rem;margin-top:1.4rem;text-wrap:balance}
   .units{margin-top:1.4rem;display:flex;gap:.6rem;flex-wrap:wrap}
@@ -88,8 +100,13 @@
   footer{border-top:1px solid var(--line);padding:2.6rem 0 3.4rem;text-align:center}
   footer .mark{font-size:2.4rem}
   footer .c{margin-top:1rem;font-family:var(--mono)}
-  footer .meta{margin-top:1.4rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-  .draft{position:fixed;bottom:.7rem;left:.7rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);opacity:.7}
+  /* drawing title-block: a boxed spec strip, like the corner of an engineering drawing */
+  footer .meta{margin-top:1.6rem;display:inline-flex;flex-wrap:wrap;justify-content:center;gap:0;
+    font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border:1px solid var(--line2);border-radius:4px;overflow:hidden}
+  footer .meta span{padding:.4rem .7rem;border-right:1px solid var(--line2)}
+  footer .meta span:last-child{border-right:0}
+  .draft{position:fixed;bottom:.7rem;left:.7rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);opacity:.7;border:1px solid var(--line2);border-radius:3px;padding:.2rem .4rem}
 </style>
 </head>
 <body>
@@ -146,6 +163,7 @@
   <p class="big">Small, senior, <strong>moving at AI speeds</strong> — real software shipped in days and weeks, where a delegated shop would still be scoping. Daily, hands-on: <strong>two-hour sessions</strong>, several days a week. We work the way we'll teach you.</p>
   <p>Because words are the work now — say <em>stateless</em> or <em>stateful</em> and you get a different system. That precision is exactly what a near-shored, obfuscated shop can't hold. And yes, we run <span class="accent-s">dark factories</span> — we pioneered them: three-plus years of RLHF, custom-tuned small models for specific tasks.</p>
   <p>The old VC clock — three-to-five-year vesting? <span class="accent-s">LOL.</span> Nobody knows what tools we'll be using in three <em>months</em>. Alpine style: no expedition of fifteen hauling a hundred pounds up the mountain. Trail runners, a shell, a clear line to the summit. Speedboat, not Titanic — small, fast, and dangerous.</p>
+  <p class="dim">How we relate to the world: 3×5 cards, whiteboards, schematics, a sticky note with the one number that matters. Pocket-protector precision, lightweight and high-bandwidth — no ceremony, no theater.</p>
   <div class="cards">
     <div class="card"><h3>Pair</h3><p>Live sessions with an expert — ~2-hour blocks, several days a week. You both leave with tasks the AI runs down.</p></div>
     <div class="card"><h3>Sprint to a goal</h3><p>Every engagement has one discrete target: ship the MVP, write the PRD, launch a region, first 100 customers.</p></div>
@@ -164,6 +182,11 @@
     <div class="unit"><b>repo</b>everything ships to GitHub — yours to keep or take to the next firm</div>
   </div>
   <p class="dim">Paid half up front, half at the end. No exceptions, no overhead. Estimates in person-units and wallclock time — min and max. Proposals arrive as working MVPs.</p>
+  <p style="margin-top:1.8rem">Every engagement flies as a named <strong>mission</strong>:</p>
+  <div class="missions">
+    <div class="mission"><div class="patch">Gemini · 2 seats</div><h3>One target, fast.</h3><p>A tight crew to a single objective — ship the MVP, write the PRD, prove the architecture, land the first region. Weeks, not quarters.</p></div>
+    <div class="mission"><div class="patch">Apollo · full stack</div><h3>The whole build.</h3><p>The complete arc under one mission — architecture through delivery, brand through go-to-market. One team, no hand-offs, one source of truth.</p></div>
+  </div>
 </div></section>
 
 <section><div class="wrap">
@@ -220,7 +243,7 @@
 <footer><div class="wrap">
   <div class="mark"><span class="m">m</span><span class="t">t</span><span class="n">n</span></div>
   <p class="c"><a href="mailto:hello@mountainhigh.codes">hello@mountainhigh.codes</a></p>
-  <div class="meta">mountainhigh.codes · concept for review · not accepting clients until march 2027</div>
+  <div class="meta"><span>mountainhigh.codes</span><span>concept · rev 2026.08.18</span><span>for review</span><span>not accepting clients until march 2027</span></div>
 </div></footer>
 
 <script>

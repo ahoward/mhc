@@ -18,6 +18,18 @@ Patagonia (a touch less crunchy-green, slightly more corporate "ascend"). Combin
 with **NASA**: mission-era engineering pride. Possibly **American colors** (open
 question — weigh against the existing `mtⁿ` fireweed/glacier/sun palette).
 
+**Nordic ski-brand register (2026-08-18, Kincaid Park):** Fischer, Alpina/Åsnes and the
+Scandinavian nordic brands — **modern and quietly militaristic without being aggressive**.
+Clean, technical, restrained, functional. This is the tuning fork: push the schematic/
+pocket-protector texture toward *precise and understated*, never busy or loud.
+
+**Decided (2026-08-18):** keep the `mtⁿ` palette (fireweed/glacier/sun + Overpass Mono);
+**layer NASA/North Face/Nordic texture on top** — schematic eyebrows, drawing title-block,
+index-card/spec blocks, mission patches. No American/navy-red reskin.
+
+**Apollo / Gemini — client-facing:** engagements fly as named **missions**. Gemini = a tight
+2-seat run to one target; Apollo = the full-stack build. (Internal teams may share the naming.)
+
 Visual/communication language — **pocket-protector engineering**, not startup-slick:
 - pocket protectors, schematics, invoices
 - 3×5 cards, yellow sticky notes, whiteboards

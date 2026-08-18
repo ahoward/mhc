@@ -44,7 +44,7 @@ hello@mountainhigh.codes
 
 The canonical concept deck is committed here: [`docs/concept-deck.html`](./concept-deck.html)
 (self-contained HTML; `mtⁿ` branding, dark/light). Circulatable render published at
-`https://drawohara.dev/x/mtn-deck-7d057f85.html`. Iterated 2026-08-18 to reposition from
+`https://drawohara.dev/x/mtn-deck-0cae8714.html`. Iterated 2026-08-18 to reposition from
 startup/VC framing toward **expert operators building real software for mission-critical
 systems** — the "no game of telephone / context is everything" thesis. See #59 for history.
 
