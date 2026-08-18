@@ -53,7 +53,9 @@ computer-science perspective**:
   they argued these tradeoffs from first principles).
 - **Dark factories** — "of course we have them; we pioneered them." **RLHF for 3+
   years**: custom-tuned **small models for specific tasks**.
-- Shared meta-programming lineage: **Ara + Ryan Cook**.
+- The deep-CS narrative (bi-temporal DBs, HA, the Perl→Fortran→hot-loaded-C++ meta-programming
+  story) is **Ara's own** — told in first person in Ara's bio, not claimed for the collective,
+  and no co-attribution. ("narrative is all mine," 2026-08-18.)
 
 Not everyone is a formally-trained computer scientist — but all have **equivalent
 experience**, and everyone has **launched things** (satellite systems → companies).
@@ -98,4 +100,4 @@ accurate world model and **scientific rigor most developers cannot navigate**.
 2. **How far to push the aesthetic** in the deck now — full NASA×North Face reskin, or
    keep current identity and land the new *copy* first?
 3. **Apollo/Gemini** — teams only, or also client-facing engagement names?
-4. **Ryan Cook** — roster seat, or credited in the pedigree narrative only?
+4. ~~Ryan Cook — roster seat or pedigree credit?~~ **Resolved: neither. Narrative is Ara's.**
