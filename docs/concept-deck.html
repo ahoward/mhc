@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mtⁿ · concept</title>
+<meta property="og:title" content="mtⁿ — mountainhigh.codes">
+<meta property="og:description" content="A special-ops team of expert operators building real software for systems that can't fail. No hype. No middle layer. Light and fast.">
+<style>
+  :root{
+    --fireweed:#C81E6E; --glacier:#1A9CB5; --sun:#D99209;
+    --ink:#0f0e12; --panel:#17161b; --panel2:#1f1e25; --fg:#EFE9DB; --dim:#948c7c;
+    --line:rgba(239,233,219,.13); --line2:rgba(239,233,219,.22);
+    --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --bg:var(--ink); --card:var(--panel);
+  }
+  @media (prefers-color-scheme:light){
+    :root{ --ink:#F2ECDD; --panel:#fbf7ec; --panel2:#f3eee0; --fg:#181510; --dim:#6a6252; --line:rgba(24,21,16,.13); --line2:rgba(24,21,16,.22); --bg:#F2ECDD; --card:#fbf7ec; }
+  }
+  :root[data-theme="dark"]{ --ink:#0f0e12; --panel:#17161b; --panel2:#1f1e25; --fg:#EFE9DB; --dim:#948c7c; --line:rgba(239,233,219,.13); --line2:rgba(239,233,219,.22); --bg:#0f0e12; --card:#17161b; }
+  :root[data-theme="light"]{ --ink:#F2ECDD; --panel:#fbf7ec; --panel2:#f3eee0; --fg:#181510; --dim:#6a6252; --line:rgba(24,21,16,.13); --line2:rgba(24,21,16,.22); --bg:#F2ECDD; --card:#fbf7ec; }
+
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.55;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:44rem;margin:0 auto;padding:0 1.3rem}
+  .mono{font-family:var(--mono)}
+  h1,h2,h3{font-family:var(--mono);font-weight:700;letter-spacing:-.01em;margin:0;text-wrap:balance}
+  a{color:var(--fireweed)}
+
+  .mark{font-family:var(--mono);font-weight:700;line-height:.9;letter-spacing:-.03em;display:inline-block}
+  .mark .m{color:var(--fireweed)} .mark .t{color:var(--glacier)}
+  .mark .n{color:var(--sun);font-size:.6em;vertical-align:.55em;margin-left:-.04em}
+
+  .theme{position:fixed;top:.7rem;right:.7rem;z-index:10;background:none;border:1px solid var(--line2);
+    color:var(--dim);font-family:var(--mono);font-size:.7rem;padding:.35rem .55rem;border-radius:6px;cursor:pointer}
+
+  section{padding:3.4rem 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  .eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--glacier);
+    display:flex;align-items:center;gap:.6rem}
+  .eyebrow .num{color:var(--sun)}
+  h2{font-size:clamp(1.4rem,4.4vw,2rem);margin:.7rem 0 0}
+  p{font-size:1.02rem;margin:.9rem 0 0;max-width:60ch}
+  p.big{font-size:clamp(1.05rem,3.2vw,1.25rem)}
+  .dim{color:var(--dim)}
+  strong{color:var(--fg)}
+  .accent-f{color:var(--fireweed)} .accent-g{color:var(--glacier)} .accent-s{color:var(--sun)}
+
+  .cover{min-height:82vh;display:flex;flex-direction:column;justify-content:center;padding-top:3rem}
+  .cover .mark{font-size:clamp(4.5rem,20vw,9rem)}
+  .cover .full{font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;text-transform:lowercase;color:var(--dim);margin:.4rem 0 1.6rem}
+  .cover .tag{font-family:var(--mono);font-size:clamp(1.15rem,4.6vw,1.7rem);font-weight:700;line-height:1.25;text-wrap:balance}
+  .cover .tag .a{color:var(--fireweed)} .cover .tag .b{color:var(--glacier)} .cover .tag .c{color:var(--sun)}
+  .cover .sub{margin-top:1.3rem;max-width:40ch}
+  .scroll{margin-top:2.4rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+
+  .cards{margin-top:1.4rem;display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+  @media(max-width:520px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+  .card h3{font-size:.98rem;color:var(--glacier)}
+  .card p{font-size:.9rem;margin-top:.4rem;color:var(--dim)}
+  .pull{font-family:var(--mono);font-size:clamp(1.1rem,3.4vw,1.5rem);line-height:1.35;border-left:3px solid var(--fireweed);
+    padding-left:1rem;margin-top:1.4rem;text-wrap:balance}
+  .units{margin-top:1.4rem;display:flex;gap:.6rem;flex-wrap:wrap}
+  .unit{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:.8rem 1rem;font-family:var(--mono);font-size:.85rem;flex:1;min-width:9rem}
+  .unit b{color:var(--sun);font-size:1.15rem;display:block}
+
+  /* scope chips */
+  .scope{margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.5rem}
+  .chip{font-family:var(--mono);font-size:.82rem;font-weight:700;border:1px solid var(--line2);border-radius:100px;
+    padding:.45rem .85rem}
+  .chip:nth-child(3n+1){color:var(--fireweed)} .chip:nth-child(3n+2){color:var(--glacier)} .chip:nth-child(3n){color:var(--sun)}
+
+  /* guild bios */
+  .bios{margin-top:1.4rem;display:flex;flex-direction:column;gap:.7rem}
+  .bio{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem}
+  .bio .who{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+  .bio h3{font-size:1.02rem}
+  .bio .role{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sun)}
+  .bio p{font-size:.92rem;margin-top:.45rem;color:var(--dim)}
+  .bio.open{border-style:dashed;opacity:.85}
+  .bio.open h3{color:var(--dim)}
+  .note{margin-top:1.2rem;font-family:var(--mono);font-size:.72rem;color:var(--dim);border-left:2px solid var(--sun);padding-left:.8rem}
+
+  footer{border-top:1px solid var(--line);padding:2.6rem 0 3.4rem;text-align:center}
+  footer .mark{font-size:2.4rem}
+  footer .c{margin-top:1rem;font-family:var(--mono)}
+  footer .meta{margin-top:1.4rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+  .draft{position:fixed;bottom:.7rem;left:.7rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);opacity:.7}
+</style>
+</head>
+<body>
+
+<button class="theme mono" id="theme">◐ theme</button>
+<span class="draft">concept · for review</span>
+
+<header class="cover"><div class="wrap">
+  <div class="mark"><span class="m">m</span><span class="t">t</span><span class="n">n</span></div>
+  <div class="full">mountainhigh.codes</div>
+  <div class="tag"><span class="a">a hacker company.</span><br><span class="b">radically simple.</span> <span class="c">light and fast.</span></div>
+  <p class="sub dim">A special-ops team of expert operators — building real software for systems that can't fail. No hype. No middle layer. No game of telephone.</p>
+  <div class="scroll">↓ scroll</div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span class="num">01</span> the idea</div>
+  <h2>A special-ops team. Not an agency.</h2>
+  <p class="big">Not a shop you hand work to, and not a roster of names you'll never meet. A small unit of <strong>expert operators</strong> — each successful on their own — who embed with you and <span class="accent-f">do the work themselves</span>.</p>
+  <p>Every member has spent <strong>thirty years shipping real, production software</strong> — the kind that flies satellites, runs plants, moves fleets, and cannot fail. Scientific computing for the government. Infrastructure at scale. Systems that hold when they're loaded. Not decks, not demos — code in production.</p>
+  <p>You don't outsource and wait. You <strong>pair with operators and learn to run it yourself</strong> — working alongside private, bleeding-edge systems, not off-the-shelf tools with buttons and screens. The kind of person who'd build a cabin in Alaska or run a hundred miles: you want to understand every piece.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span class="num">02</span> what we do</div>
+  <h2>One unit. The whole build.</h2>
+  <p>One team covers the full arc — so you're not stitching five vendors together, and no context leaks in the seams between them:</p>
+  <div class="scope">
+    <span class="chip">architecture</span>
+    <span class="chip">build</span>
+    <span class="chip">security &amp; compliance</span>
+    <span class="chip">data &amp; integration</span>
+    <span class="chip">delivery &amp; ops</span>
+    <span class="chip">design</span>
+    <span class="chip">brand &amp; copy</span>
+    <span class="chip">positioning</span>
+  </div>
+  <p class="dim">Half a person of engineering and half a person of positioning beats two people of either. You book the mix the sprint actually needs — and every seat is a principal, not a hand-off.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span class="num">03</span> the thesis</div>
+  <h2>Context is the whole game now.</h2>
+  <p class="big">The edge in the new world is narrow and total: <strong>saying exactly the right thing, the right way, to the right models, at the right time.</strong> That is the job. The quality of the context <em>is</em> the quality of the software.</p>
+  <p>Which is why a <span class="accent-f">game of telephone</span> is now fatal. A nearshore team, an offshore team, a layer of account managers — every hop between the intent and the machine degrades the one thing that matters, at the exact moment in history when it matters most. You cannot delegate the context to people three time zones from the decision and expect the system to hold.</p>
+  <p>So the experts do it themselves. The person who understands your system is the person at the keyboard, talking to the models. That is <span class="accent-g">context engineering</span> — encoding the vision, the constraints, and the contracts so precisely that machines execute against them and validators prove it.</p>
+  <p class="pull">Humans declare intent. Machines generate implementations. Validators enforce contracts.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span class="num">04</span> how we work</div>
+  <h2>Quietly lethal.</h2>
+  <p class="big">A special-ops team, not a headcount. Small, senior, and <strong>moving at AI speeds</strong> — real software shipped in days and weeks, where a delegated shop would still be scoping.</p>
+  <p>The old VC clock — three-to-five-year vesting? <span class="accent-s">LOL.</span> Nobody knows what tools we'll be using in three <em>months</em>. Alpine style: no expedition of fifteen hauling a hundred pounds up the mountain. Trail runners, a shell, a clear line to the summit. Speedboat, not Titanic — small, fast, and dangerous.</p>
+  <div class="cards">
+    <div class="card"><h3>Pair</h3><p>Live sessions with an expert — ~2-hour blocks, several days a week. You both leave with tasks the AI runs down.</p></div>
+    <div class="card"><h3>Sprint to a goal</h3><p>Every engagement has one discrete target: ship the MVP, write the PRD, launch a region, first 100 customers.</p></div>
+    <div class="card"><h3>Ship a repo</h3><p>The deliverable is always a repository. GitHub is the backplane — perfect memory across every session and agent.</p></div>
+    <div class="card"><h3>Own it</h3><p>You keep everything — code, docs, the working MVP — yours to run or carry to the next firm.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span class="num">05</span> the model</div>
+  <h2>Ultra-simple economics.</h2>
+  <p>A collective. Flat, distributed, lightweight. You book people in <strong>units</strong> — no one is ever beholden to a single client.</p>
+  <div class="units">
+    <div class="unit"><b>½</b>person / month · the smallest thrust — research or an MVP</div>
+    <div class="unit"><b>1&ndash;3</b>units · scale up; ~40&ndash;60 hrs/week at full tilt</div>
+    <div class="unit"><b>repo</b>everything ships to GitHub — yours to keep or take to the next firm</div>
+  </div>
+  <p class="dim">Paid half up front, half at the end. No exceptions, no overhead. Estimates in person-units and wallclock time — min and max. Proposals arrive as working MVPs.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span class="num">06</span> the guild</div>
+  <h2>Seven seats. Thirty years each.</h2>
+  <p class="dim">A first sketch of the roster — every bio below is a <strong>draft hypothesis</strong>, written to react to, pending each human's blessing.</p>
+  <div class="bios">
+    <div class="bio">
+      <div class="who"><h3>Ara T. Howard</h3><span class="role">code · ai systems · founder</span></div>
+      <p>Ruby Hero. Ex-NOAA scientific computing. Founder of dojo4 and codeforpeople. Thirty years shipping infrastructure — now building the agentic systems that program companies. Spun this guild from dojo4 cloth.</p>
+    </div>
+    <div class="bio">
+      <div class="who"><h3>Steve Bailey</h3><span class="role">design · brand · copy</span></div>
+      <p>dojo4 alum. The designer founders actually understand — brand, identity, and copy that says the thing plainly. Pairs with you until the story and the surface are one piece.</p>
+    </div>
+    <div class="bio">
+      <div class="who"><h3>Anthony Dimitri</h3><span class="role">engineering · product</span></div>
+      <p>dojo4 alum. Veteran product engineer — the steady hand that turns an MVP sprint into a system you can live on. Has built for startups through every stack cycle since the LAMP days.</p>
+    </div>
+    <div class="bio">
+      <div class="who"><h3>Eric Marcoullier</h3><span class="role">coaching · pmf · investing</span></div>
+      <p>Startup coach and investor. Co-founded Gnip (acquired by Twitter) and MyBlogLog (acquired by Yahoo). One of the guild's earliest clients turned member — the person founders call before they bet the company.</p>
+    </div>
+    <div class="bio open">
+      <div class="who"><h3>open seat</h3><span class="role">marketing · growth</span></div>
+      <p>Positioning, go-to-market, and the first hundred customers — AI-native, spreadsheet-honest.</p>
+    </div>
+    <div class="bio open">
+      <div class="who"><h3>open seat</h3><span class="role">fundraising · finance</span></div>
+      <p>Raises, terms, and the money math — from bootstrap discipline to a clean cap table.</p>
+    </div>
+    <div class="bio open">
+      <div class="who"><h3>open seat</h3><span class="role">operations · people</span></div>
+      <p>The company around the product — legal, ops, hiring, and keeping it all radically simple.</p>
+    </div>
+  </div>
+  <p class="note">names + bios = hypothesis for discussion. nothing here is agreed, blessed, or announced.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span class="num">07</span> who it's for</div>
+  <h2>Systems that can't fail.</h2>
+  <p class="big">Real software for real operations — <strong>car makers, .gov and .mil, school systems, title monitoring, energy and mining, logistics.</strong> Regulated, load-bearing, consequential. Not the startup hype cycle — more marketing than meat — but the software an organization actually runs on.</p>
+  <p>A trucking company with 700 drivers that could build software, has never tried, and will lose if it doesn't. A cleared program that needs the work done <em>inside</em> the fence, by the people who understand it. We're the <span class="accent-g">AI-tech partner</span> for the things that matter — find the cutting-edge custom solution, build it, prove it, and — if they want — help them run a mini-SaaS off it. Like open source, but novel.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span class="num">08</span> the cloth</div>
+  <h2>Spun from dojo4.</h2>
+  <p>Rewoven in the mountains of Alaska and Colorado. Deep dev for think-tanks, private equity, .gov and .mil. Zero VC — and we'd be happy to never say the word again. <strong>No <span class="accent-s">#vcevil</span>.</strong></p>
+  <p class="pull">Everyone here is successful on their own. The company is a loose thread — we want you self-promotional, building your own name. That <em>is</em> the brand.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="mark"><span class="m">m</span><span class="t">t</span><span class="n">n</span></div>
+  <p class="c"><a href="mailto:hello@mountainhigh.codes">hello@mountainhigh.codes</a></p>
+  <div class="meta">mountainhigh.codes · concept for review · not accepting clients until march 2027</div>
+</div></footer>
+
+<script>
+  (function(){
+    var root=document.documentElement, b=document.getElementById('theme');
+    b.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      root.setAttribute('data-theme',cur==='dark'?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

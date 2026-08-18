@@ -42,7 +42,11 @@ for think-tanks, p.e., and .gov. no #vcevil. not accepting clients until march 2
 hello@mountainhigh.codes
 ```
 
-A reviewed one-pager rendering of this lives as a Claude artifact (see #59 for the link).
+The canonical concept deck is committed here: [`docs/concept-deck.html`](./concept-deck.html)
+(self-contained HTML; `mtⁿ` branding, dark/light). Circulatable render published at
+`https://drawohara.dev/x/mtn-deck-b4ceea79.html`. Iterated 2026-08-18 to reposition from
+startup/VC framing toward **expert operators building real software for mission-critical
+systems** — the "no game of telephone / context is everything" thesis. See #59 for history.
 
 ## Company concept (the guild)
 
@@ -54,8 +58,11 @@ private, in-development systems, not off-the-shelf tools.
 - **Ethos:** light-and-fast alpine mountaineering — speedboat vs Titanic; ship in days/weeks.
 - **NOT** relaunching under Dojo 4, but **link to / lean on** Dojo 4 hard. (Deciding Dojo 4 reboot
   vs Mountain High → chose Mountain High.)
-- **Target:** SMBs that never built software (e.g. a 700-trucker company) — outsourced one-stop
-  ai-tech partner; help them run a "mini-saas" if they want. See destroysaas.coop for the logic.
+- **Target (2026-08-18 pivot):** real software for **systems that can't fail** — car makers,
+  .gov/.mil, school systems, title monitoring, energy/mining, logistics. Regulated, load-bearing,
+  consequential; **zero VC**. Still serves real businesses that never built software (e.g. a
+  700-trucker company) — outsourced one-stop ai-tech partner; help them run a "mini-saas" if they
+  want. See destroysaas.coop for the logic.
 
 ### Economics
 - 1099 collective; LLC now → LCA later (tax). Flat, but Ara calls shots initially.
