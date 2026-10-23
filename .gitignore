@@ -1,22 +1,13 @@
-# generated build output (CI rebuilds and deploys this)
-/build
-/tmp
-
-# ruby / bundler
-/vendor/bundle
-/.bundle
-*.gem
-
-# node (favicon build pipeline uses sharp; not committed)
 /node_modules
+/dist
+/.astro
+/.wrangler
 
 # env / secrets
 .env
-.env*.local
+.env.*
+.dev.vars
 .kee
-
-# vercel (legacy — being retired)
-.vercel
 
 # os
 .DS_Store

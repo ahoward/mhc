@@ -1,0 +1,12 @@
+{
+  // static-assets worker. pages and images are prebuilt by astro.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mhc",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist/client",
+    "not_found_handling": "404-page"
+  },
+  "observability": { "enabled": true }
+}

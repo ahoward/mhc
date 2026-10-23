@@ -1,0 +1,22 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../layouts/Base.astro";
+
+// src/content/pages/index.md -> /, foo.md -> /foo, foo/bar.md -> /foo/bar
+export async function getStaticPaths() {
+  const pages = await getCollection("pages", ({ data }) =>
+    import.meta.env.PROD ? !data.draft : true
+  );
+  return pages.map((page) => ({
+    params: { slug: page.id === "index" ? undefined : page.id.replace(/\/index$/, "") },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<Base title={page.data.title} description={page.data.description}>
+  <Content />
+</Base>

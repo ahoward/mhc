@@ -1,11 +1,22 @@
 {
+  "name": "mhc",
   "private": true,
-  "description": "dev-only tooling for the mtⁿ favicon/wordmark pipeline (brand/build.mjs)",
+  "type": "module",
+  "description": "mtⁿ · mountainhigh.codes — astro on cloudflare workers, content as md in git",
   "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro build && wrangler dev",
+    "deploy": "astro build && wrangler deploy",
     "brand": "node brand/build.mjs"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.3.1",
+    "astro": "^7.3.2"
   },
   "devDependencies": {
     "png-to-ico": "^3.0.1",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "wrangler": "^4.125.0"
   }
 }
