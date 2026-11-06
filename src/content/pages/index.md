@@ -1,16 +1,31 @@
 ---
 title: mtⁿ
-description: a hacker company. radically simple. utter zen.
+description: a hacker collective. radically simple. utter zen.
 ---
 
-a hacker company. radically simple. utter zen.
+<p class="eyebrow">a collective &middot; run by the people who do the work</p>
 
-one repo. one inbox. nothing required beyond getting access to this repo &mdash; get added, get the key, go.
+a hacker collective. radically simple. utter zen.
 
-we build cutting-edge software for smbs that have never built software. a stop-loss against the firms that would have failed them. one-stop ai-tech partners. the cost of doing business.
+thirty years writing hard software. not startup theater. engineering.
 
-a collective. flat. distributed. lightweight. you book half a person per month, in half-month chunks, paid half up front and half at the end. no exceptions. no overhead. estimates in person-units and wallclock time, with min and max. proposals ship as working mvps you may take to the next firm.
+real means systems that hold under load and do not lie to you:
 
-spun from [dojo4](https://dojo4.com) cloth, rewoven in the mountains of alaska and colorado. deep dev for think-tanks, p.e., and .gov. no <span class="vcevil">#vcevil</span>. not accepting clients until march 2027.
+<div class="spec">
+<span>high availability at scale.</span>
+<span>bi-temporal databases &mdash; written from scratch. correctness over time is not optional.</span>
+<span>meta-programming that generated its own compiled kernels and hot-loaded them at runtime &mdash; no database to fail.</span>
+<span>dark factories. three years of rlhf, tuning small models to do one job perfectly.</span>
+</div>
+
+no founders. no round. no exit. the people who do the work own the work &mdash; an llc today, a **cooperative** (lca) as soon as the paperwork allows.
+
+one repo. one inbox. radically transparent. get added, get the key, go.
+
+you book half a person per month, in half-month chunks, paid half up front and half at the end. no exceptions. no overhead. estimates in person-units and wallclock time, with min and max. proposals ship as working mvps you may take to the next firm.
+
+spun from [dojo4](https://dojo4.com) cloth, rewoven in the mountains of alaska and colorado. deep dev for **.gov, defense, think-tanks, and p.e.** &mdash; and for smbs that have never built software. no <span class="vcevil">#vcevil</span>. taking select work now.
+
+<p class="creed">rope up. climb together.</p>
 
 <p class="contact"><a href="mailto:hello@mountainhigh.codes">hello@mountainhigh.codes</a></p>

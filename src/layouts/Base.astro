@@ -3,7 +3,7 @@ interface Props {
   title: string;
   description?: string;
 }
-const { title, description = "a hacker company. radically simple. utter zen." } = Astro.props;
+const { title, description = "a hacker collective. radically simple. utter zen." } = Astro.props;
 ---
 
 <!doctype html>
@@ -81,7 +81,38 @@ const { title, description = "a hacker company. radically simple. utter zen." } 
 
     .vcevil { color: var(--fireweed); }
 
-    .contact { margin-top: 3rem; font-size: 1.1em; }
+    /* small caps label under the wordmark */
+    .eyebrow {
+      margin: -2.2rem 0 2.4rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--tundra);
+    }
+
+    /* pedigree list with a fireweed left rule */
+    .spec {
+      margin: 0 0 1.4rem;
+      padding: 0.2rem 0 0.2rem 1.1rem;
+      border-left: 2px solid var(--fireweed);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .spec span { display: block; font-size: 0.95em; }
+
+    strong { color: var(--fireweed); font-weight: 700; }
+
+    /* closing line */
+    .creed {
+      margin: 2.4rem 0 0;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--glacier);
+    }
+
+    .contact { margin-top: 2rem; font-size: 1.1em; }
   </style>
 </head>
 
