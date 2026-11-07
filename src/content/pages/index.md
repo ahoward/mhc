@@ -1,31 +1,29 @@
 ---
 title: mtⁿ
-description: a hacker collective. radically simple. utter zen.
+description: an engineering collective, owned by the people who do the work.
 ---
 
-<p class="eyebrow">a collective &middot; run by the people who do the work</p>
+<p class="eyebrow">engineering collective &middot; alaska &amp; colorado</p>
 
-a hacker collective. radically simple. utter zen.
+an engineering collective, owned by the people who do the work.
 
-thirty years writing hard software. not startup theater. engineering.
-
-real means systems that hold under load and do not lie to you:
+we write hard software: systems that hold under load and do not lie to you.
 
 <div class="spec">
 <span>high availability at scale.</span>
-<span>bi-temporal databases &mdash; written from scratch. correctness over time is not optional.</span>
-<span>meta-programming that generated its own compiled kernels and hot-loaded them at runtime &mdash; no database to fail.</span>
+<span>bi-temporal databases, written from scratch. correctness over time is not optional.</span>
+<span>meta-programming that generated its own compiled kernels and hot-loaded them at runtime. no database to fail.</span>
 <span>dark factories. three years of rlhf, tuning small models to do one job perfectly.</span>
 </div>
 
-no founders. no round. no exit. the people who do the work own the work &mdash; an llc today, a **cooperative** (lca) as soon as the paperwork allows.
+thirty years of it. engineering is a science, and we practice it like one: measure, model, test, ship.
 
-one repo. one inbox. radically transparent. get added, get the key, go.
+no founders. no investors. no exit. an llc today, a **cooperative** (lca) as soon as the paperwork allows.
 
-you book half a person per month, in half-month chunks, paid half up front and half at the end. no exceptions. no overhead. estimates in person-units and wallclock time, with min and max. proposals ship as working mvps you may take to the next firm.
+the terms are public. you book half an engineer per month, in half-month blocks, paid half up front and half on delivery. estimates in person-months and wallclock time, with a min and a max. every proposal ships as a working prototype you keep, whether or not you hire us.
 
-spun from [dojo4](https://dojo4.com) cloth, rewoven in the mountains of alaska and colorado. deep dev for **.gov, defense, think-tanks, and p.e.** &mdash; and for smbs that have never built software. no <span class="vcevil">#vcevil</span>. taking select work now.
+one repo. one inbox. transparent by default.
 
-<p class="creed">rope up. climb together.</p>
+clients: **.gov, defense, think-tanks, p.e.**, and small businesses building their first software. spun out of [dojo4](https://dojo4.com). <span class="vcevil">no venture capital.</span> taking select work now.
 
 <p class="contact"><a href="mailto:hello@mountainhigh.codes">hello@mountainhigh.codes</a></p>
